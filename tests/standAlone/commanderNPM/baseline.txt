@@ -1,0 +1,15 @@
+Exec
+exec hello using undefined mode
+
+Star
+setup for normal env(s) with normal mode
+
+Star
+setup for normal env(s) with normal mode
+
+Exec2
+exec hello using j mode
+
+Exec2
+exec hello using j mode
+Done!

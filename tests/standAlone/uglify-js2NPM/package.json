@@ -1,0 +1,9 @@
+{
+  "name"        : "uglify-js2NPM",
+  "version"     : "0.1.0",
+  "description" : "NPM uglify-js2 application for testing TTD.",
+  "license"     : "MIT", 
+  "dependencies": {
+    "uglify-js2"   : "2.1.11"
+  }
+}

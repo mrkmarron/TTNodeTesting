@@ -1,0 +1,19 @@
+Testing compress
+Compress ok
+79
+120
+eJzzSM3JyVcIzy/KSVFU0NVV8M3PUwhOLVAwNFIwMjA0UzA0tDIwszIwUHD3DdE1MAcyNAISkzPTMpMVXBIrczLTM0oUQjJzUzUB5pgUkw==
+
+Testing decompress
+79
+120
+Decompress ok
+73
+72
+Hello World! -- Mon Sep 12 2016 11:06:00 GMT-0700 (Pacific Daylight Time)
+
+Testing decompress that fails
+43
+29
+error
+Done!

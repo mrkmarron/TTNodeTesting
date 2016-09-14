@@ -1,0 +1,33 @@
+Basic test
+<h2 class="title welcome">Hello there!</h2>
+
+Selector test
+Apple
+pear
+Orange
+
+Attributes test
+fruits
+favorite
+
+Data test
+{"appleColor":"red"}
+red
+
+Remove test
+<ul id="fruits">   <li class="">Apple</li>   <li class="orange">Orange</li>   <li class="">Pear</li> </ul>
+
+Traversing test
+3
+1
+
+Children test
+3
+Pear
+
+Append test
+4
+
+Children test
+2
+Done!
