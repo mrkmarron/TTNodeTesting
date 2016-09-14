@@ -1,0 +1,25 @@
+Basic test
+<!DOCTYPE html><html lang="en"><head><title></title><script type="text/javascript">if (foo) bar(1 + 5)</script></head><body><h1>Pug - node template engine</h1><div class="col" id="container"><p>Get on it!</p><p>Pug is a terse and simple templating language with a
+strong focus on performance and powerful features.</p></div></body></html>
+
+Basic compile test
+
+Basic execute test
+<p>Timothy's Pug source code!</p>
+<p>Forbes's Pug source code!</p>
+
+Loop compile test
+
+Loop execute test
+<li>Uno bananas</li><li>Dos bananas</li><li>Tres bananas</li><li>Cuatro bananas</li><li>Cinco bananas</li><li>Seis bananas</li>
+
+Includes test
+<!DOCTYPE html><html><head><title>My Site</title><script src="/javascripts/jquery.js"></script><script src="/javascripts/app.js"></script></head><body><h1>My Site</h1><p>Welcome to my super lame site.</p></body></html>
+
+Error test
+Error: Pug:1:28
+  > 1| p #{name's Pug source code!
+----------------------------------^
+
+End of line was reached with no closing bracket for interpolation.
+Done!

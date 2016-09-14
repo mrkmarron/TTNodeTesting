@@ -1,0 +1,9 @@
+{
+  "name"        : "pugNPM",
+  "version"     : "0.1.0",
+  "description" : "NPM pug application for testing TTD.",
+  "license"     : "MIT", 
+  "dependencies": {
+    "pug"   : "2.0.0-beta6"
+  }
+}

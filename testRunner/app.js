@@ -21,13 +21,14 @@ let failing = 0;
 let tests = [
     {path: 'C:\\Chakra\\TTNodeTest\\tests\\standAlone\\cheerioNPM', hlCount: [5, 100], sinterval:0},
     {path: 'C:\\Chakra\\TTNodeTest\\tests\\standAlone\\commanderNPM', hlCount: [5, 100], sinterval:0},
+    {path: 'C:\\Chakra\\TTNodeTest\\tests\\standAlone\\pugNPM', hlCount: [5, 100], sinterval:0},
     {path: 'C:\\Chakra\\TTNodeTest\\tests\\standAlone\\random', hlCount: [4, 100], sinterval:0},
     // {path: 'C:\\Chakra\\TTNodeTest\\tests\\standAlone\\uglify-js2NPM', hlCount: [4, 100], sinterval:0}, -- needs multi-context support
     {path: 'C:\\Chakra\\TTNodeTest\\tests\\standAlone\\zlib', hlCount: [4, 100], sinterval:0}
 ];
 
 //for debugging a single test
-//tests = [{path: 'C:\\Chakra\\TTNodeTest\\tests\\standAlone\\cheerioNPM', hlCount: [5, 100], sinterval:0}];
+//tests = [{path: 'C:\\Chakra\\TTNodeTest\\tests\\standAlone\\pugNPM', hlCount: [5, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {
     for(var i = 0; i < tests.length; ++i) {
