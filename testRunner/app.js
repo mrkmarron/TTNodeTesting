@@ -1,6 +1,5 @@
 let assert = require('assert');
 let path = require('filepath');
-
 let chalk = require('chalk');
 
 let saTest = require('./standAloneTest');
@@ -18,23 +17,26 @@ let currentTask = 0;
 let passing = 0;
 let failing = 0;
 
-let tests = [
-    {path: 'C:\\Chakra\\TTNodeTest\\tests\\standAlone\\cheerioNPM', hlCount: [5, 100], sinterval:0},
-    {path: 'C:\\Chakra\\TTNodeTest\\tests\\standAlone\\commanderNPM', hlCount: [5, 100], sinterval:0},
-    {path: 'C:\\Chakra\\TTNodeTest\\tests\\standAlone\\pugNPM', hlCount: [5, 100], sinterval:0},
-    {path: 'C:\\Chakra\\TTNodeTest\\tests\\standAlone\\random', hlCount: [4, 100], sinterval:0},
+let standAloneTests = [
+    {path: 'cheerioNPM', hlCount: [5, 100], sinterval:0},
+    {path: 'commanderNPM', hlCount: [5, 100], sinterval:0},
+    {path: 'jshintNPM', hlCount: [3, 100], sinterval:0},
+    {path: 'pugNPM', hlCount: [5, 100], sinterval:0},
+    {path: 'random', hlCount: [4, 100], sinterval:0},
     // {path: 'C:\\Chakra\\TTNodeTest\\tests\\standAlone\\uglify-js2NPM', hlCount: [4, 100], sinterval:0}, -- needs multi-context support
-    {path: 'C:\\Chakra\\TTNodeTest\\tests\\standAlone\\zlib', hlCount: [4, 100], sinterval:0}
+    {path: 'zlib', hlCount: [4, 100], sinterval:0}
 ];
 
 //for debugging a single test
-//tests = [{path: 'C:\\Chakra\\TTNodeTest\\tests\\standAlone\\pugNPM', hlCount: [5, 100], sinterval:0}];
+standAloneTests = [{path: 'jshintNPM', hlCount: [3, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {
-    for(var i = 0; i < tests.length; ++i) {
-        let ctest = tests[i];
+    let rootPath = path.create(__dirname).resolve('..\\tests\\standAlone\\');
 
-        let sp = path.create(ctest.path);
+    for(var i = 0; i < standAloneTests.length; ++i) {
+        let ctest = standAloneTests[i];
+
+        let sp = rootPath.append(ctest.path);
         let st = saTest.loadTest(nodePath, sp);
         taskList.push({task: st, nextAction: TaskStateFlag.record, hlCount: ctest.hlCount, sinterval: ctest.sinterval});
     }

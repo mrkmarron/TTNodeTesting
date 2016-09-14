@@ -1,0 +1,12 @@
+Basic test
+{"functions":[{"name":"goo","param":null,"line":1,"character":14,"last":1,"lastcharacter":18,"metrics":{"complexity":1,"parameters":0,"statements":0}}],"options":{"undef":true,"indent":4,"maxerr":50},"errors":[{"id":"(error)","raw":"Read only.","code":"W020","evidence":"foo = 3;","line":2,"character":1,"scope":"(main)","reason":"Read only."}],"globals":["goo","foo"],"unused":[{"name":"goo","line":1,"character":10}]}
+
+nullCmp test
+{"functions":[{"name":"main","param":["a","b"],"line":1,"character":15,"last":3,"lastcharacter":2,"metrics":{"complexity":1,"parameters":2,"statements":1}}],"options":{"indent":4,"maxerr":50},"errors":[{"id":"(error)","raw":"Use '{a}' to compare with '{b}'.","code":"W041","evidence":"return a == null;","line":2,"character":10,"scope":"(main)","a":"===","b":"null","reason":"Use '===' to compare with 'null'."}],"globals":["main"],"unused":[{"name":"main","line":1,"character":10}]}
+
+nullCmpWSuppress test
+{"functions":[{"name":"main","param":["a","b"],"line":2,"character":15,"last":4,"lastcharacter":2,"metrics":{"complexity":1,"parameters":2,"statements":1}}],"options":{"indent":4,"maxerr":50,"unused":true,"eqnull":true},"errors":[{"id":"(error)","raw":"'{a}' is defined but never used.","code":"W098","evidence":"function main(a, b) {","line":2,"character":18,"scope":"(main)","a":"b","reason":"'b' is defined but never used."},{"id":"(error)","raw":"'{a}' is defined but never used.","code":"W098","evidence":"function main(a, b) {","line":2,"character":10,"scope":"(main)","a":"main","reason":"'main' is defined but never used."}],"globals":["main"],"unused":[{"name":"b","line":2,"character":18},{"name":"main","line":2,"character":10}]}
+
+noDefaultSwitch test
+{"functions":[{"name":"main","param":["a","b"],"line":1,"character":15,"last":9,"lastcharacter":2,"metrics":{"complexity":3,"parameters":2,"statements":2}}],"options":{"indent":4,"maxerr":50},"errors":[{"id":"(error)","raw":"Expected a 'break' statement before '{a}'.","code":"W086","evidence":"x = 1;","line":5,"character":6,"scope":"(main)","a":"case","reason":"Expected a 'break' statement before 'case'."}],"implieds":[{"name":"cond","line":[3]}],"globals":["main"],"unused":[{"name":"main","line":1,"character":10}]}
+Done!

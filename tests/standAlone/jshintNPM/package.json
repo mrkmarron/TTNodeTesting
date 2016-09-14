@@ -1,0 +1,9 @@
+{
+  "name"        : "jshintNPM",
+  "version"     : "0.1.0",
+  "description" : "NPM jshint application for testing TTD.",
+  "license"     : "MIT", 
+  "dependencies": {
+    "jshint"   : "2.9.3"
+  }
+}
