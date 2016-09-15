@@ -1,0 +1,9 @@
+{
+  "name"        : "jsdomNPM",
+  "version"     : "0.1.0",
+  "description" : "NPM jsdom application for testing TTD.",
+  "license"     : "MIT", 
+  "dependencies": {
+    "jsdom"   : "9.5.0"
+  }
+}

@@ -1,0 +1,35 @@
+Bold test
+<p>I am using <strong>markdown</strong>.</p>
+
+
+Link test
+<p>I am using <a href="https://www.npmjs.com/package/marked">markdown</a>.</p>
+
+
+Blockquote test
+<h2 id="i-am-using">I am using</h2>
+<blockquote>
+<p>markdown</p>
+</blockquote>
+
+
+List1 test
+<p>I am using</p>
+<ul>
+<li><em>markdown</em></li>
+<li>with a list</li>
+</ul>
+
+
+List2 test
+<p>I am using</p>
+<ul>
+<li><strong>markdown</strong></li>
+<li>with a list</li>
+</ul>
+
+
+Inline code test
+<p>I am using <code>var v = &quot;markdown&quot;;</code>.</p>
+
+Done!
