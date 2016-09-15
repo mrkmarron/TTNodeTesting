@@ -1,0 +1,15 @@
+Basic test clean
+[]
+
+Basic test warn
+[{"ruleId":"semi","severity":2,"message":"Missing semicolon.","line":1,"column":17,"nodeType":"VariableDeclaration","source":"var foo; var bar","fix":{"range":[16,16],"text":";"}}]
+
+Basic file clean
+{"results":[{"filePath":"C:\\Chakra\\TTNodeTest\\tests\\standAlone\\eslintNPM\\clean.js","messages":[],"errorCount":0,"warningCount":0}],"errorCount":0,"warningCount":0}
+
+Basic file warn
+{"results":[{"filePath":"C:\\Chakra\\TTNodeTest\\tests\\standAlone\\eslintNPM\\report.js","messages":[{"ruleId":"curly","severity":2,"message":"Expected { after 'if' condition.","line":3,"column":1,"nodeType":"IfStatement","source":"if(x == null)"},{"ruleId":"eqeqeq","severity":2,"message":"Expected '===' and instead saw '=='.","line":3,"column":6,"nodeType":"BinaryExpression","source":"if(x == null)"},{"ruleId":"semi","severity":2,"message":"Missing semicolon.","line":4,"column":15,"nodeType":"ExpressionStatement","source":"    foo = null","fix":{"range":[41,41],"text":";"}},{"ruleId":"curly","severity":2,"message":"Expected { after 'else'.","line":5,"column":1,"nodeType":"IfStatement","source":"else"}],"errorCount":4,"warningCount":0}],"errorCount":4,"warningCount":0}
+
+Multiple file test
+{"results":[{"filePath":"C:\\Chakra\\TTNodeTest\\tests\\standAlone\\eslintNPM\\clean.js","messages":[],"errorCount":0,"warningCount":0},{"filePath":"C:\\Chakra\\TTNodeTest\\tests\\standAlone\\eslintNPM\\report.js","messages":[{"ruleId":"curly","severity":2,"message":"Expected { after 'if' condition.","line":3,"column":1,"nodeType":"IfStatement","source":"if(x == null)"},{"ruleId":"eqeqeq","severity":2,"message":"Expected '===' and instead saw '=='.","line":3,"column":6,"nodeType":"BinaryExpression","source":"if(x == null)"},{"ruleId":"semi","severity":2,"message":"Missing semicolon.","line":4,"column":15,"nodeType":"ExpressionStatement","source":"    foo = null","fix":{"range":[41,41],"text":";"}},{"ruleId":"curly","severity":2,"message":"Expected { after 'else'.","line":5,"column":1,"nodeType":"IfStatement","source":"else"}],"errorCount":4,"warningCount":0}],"errorCount":4,"warningCount":0}
+Done!
