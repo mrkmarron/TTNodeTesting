@@ -22,6 +22,7 @@ let standAloneTests = [
     {path: 'cheerioNPM', hlCount: [5, 100], sinterval:0},
     {path: 'commanderNPM', hlCount: [5, 100], sinterval:0},
     {path: 'eslintNPM', hlCount: [3, 100], sinterval:0},
+    {path: 'fsextraNPM', hlCount: [5, 100], sinterval:0},
     {path: 'jsdomNPM', hlCount: [3, 100], sinterval:0, warn: 'Needs multi-context support & es6 generator functions + blocked on Chakra OOS. Also add jQuery once this runs.'},
     {path: 'jshintNPM', hlCount: [3, 100], sinterval:0},
     {path: 'jsomeNPM', hlCount: [3, 100], sinterval:0},
@@ -35,7 +36,7 @@ let standAloneTests = [
 ];
 
 //for debugging a single test
-//standAloneTests = [{path: 'minimistNPM', hlCount: [3, 100], sinterval:0}];
+//standAloneTests = [{path: 'fsextraNPM', hlCount: [5, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {
     let rootPath = path.create(__dirname).resolve('..\\tests\\standAlone\\');

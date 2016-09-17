@@ -1,0 +1,33 @@
+Exists sync test
+Ok!
+
+Exists async test
+Ok!
+
+WriteJson sync test
+Ok!
+
+WriteJson async test
+Ok!
+
+Walk test
+testDir is a directory
+dir1 is a directory
+dir2 is a directory
+file1.json is a file
+file2.json is a file
+filex1.json is a file
+filex2.json is a file
+
+Fail move sync test
+Error when copying (as expected)
+
+Fail move async test
+Error when moving (as expected)
+
+Copy sync test
+Ok!
+
+Copy async test
+Ok!
+Done!
