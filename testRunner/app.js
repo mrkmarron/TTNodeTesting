@@ -18,21 +18,24 @@ let passing = 0;
 let failing = 0;
 
 let standAloneTests = [
+    {path: 'chalkNPM', hlCount: [3, 100], sinterval:0},
     {path: 'cheerioNPM', hlCount: [5, 100], sinterval:0},
     {path: 'commanderNPM', hlCount: [5, 100], sinterval:0},
     {path: 'eslintNPM', hlCount: [3, 100], sinterval:0},
-    // {path: 'jsdomNPM', hlCount: [3, 100], sinterval:0}, -- needs multi-context support & es6 generator functions + blocked on Chakra OOS
+    {path: 'jsdomNPM', hlCount: [3, 100], sinterval:0, warn: 'Needs multi-context support & es6 generator functions + blocked on Chakra OOS. Also add jQuery once this runs.'},
     {path: 'jshintNPM', hlCount: [3, 100], sinterval:0},
     {path: 'jsomeNPM', hlCount: [3, 100], sinterval:0},
     {path: 'markedNPM', hlCount: [3, 100], sinterval:0},
+    {path: 'minimistNPM', hlCount: [3, 100], sinterval:0},
+    {path: 'momentNPM', hlCount: [3, 100], sinterval:0},
     {path: 'pugNPM', hlCount: [5, 100], sinterval:0},
     {path: 'random', hlCount: [4, 100], sinterval:0},
-    // {path: 'uglify-js2NPM', hlCount: [4, 100], sinterval:0}, -- needs multi-context support
+    {path: 'uglify-js2NPM', hlCount: [4, 100], sinterval:0, warn: 'Needs multi-context support'},
     {path: 'zlib', hlCount: [4, 100], sinterval:0}
 ];
 
 //for debugging a single test
-//standAloneTests = [{path: 'jsomeNPM', hlCount: [3, 100], sinterval:0}];
+//standAloneTests = [{path: 'minimistNPM', hlCount: [3, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {
     let rootPath = path.create(__dirname).resolve('..\\tests\\standAlone\\');
@@ -42,7 +45,13 @@ function LoadAllStandAloneTests() {
 
         let sp = rootPath.append(ctest.path);
         let st = saTest.loadTest(nodePath, sp);
-        taskList.push({task: st, nextAction: TaskStateFlag.record, hlCount: ctest.hlCount, sinterval: ctest.sinterval});
+
+        let ttask = {task: st, nextAction: TaskStateFlag.record, hlCount: ctest.hlCount, sinterval: ctest.sinterval};
+        if(ctest.warn !== undefined) {
+            ttask.warn = ctest.warn;
+        }
+
+        taskList.push(ttask);
     }
 }
 
@@ -62,11 +71,11 @@ function ReportResults() {
 function ProcessSingleResult(success) {
     if (success) {
         passing++;
-        console.log(chalk.green('passed'));
+        console.log(chalk.green('Passed'));
     }
     else {
         failing++;
-        console.log(chalk.bold.red('failed'));
+        console.log(chalk.bold.red('Failed'));
     }
 
     let cTask = taskList[currentTask];
@@ -101,12 +110,21 @@ function ProcessWork() {
     else {
         let cTask = taskList[currentTask];
 
-        if(cTask.nextAction === TaskStateFlag.record) {
-            cTask.task.runRecord(ProcessSingleResult, cTask.sinterval, cTask.hlCount.pop());
+        if(cTask.warn !== undefined) {
+            console.log(`Skipping Test for ${chalk.bold(cTask.task.name)}...`)
+            console.log(chalk.bold.yellow('Warn: ' + cTask.warn));
+
+            currentTask++;
+            setImmediate(ProcessWork);
         }
         else {
-            assert(cTask.nextAction === TaskStateFlag.replay);
-            cTask.task.runReplay(ProcessSingleResult);    
+            if (cTask.nextAction === TaskStateFlag.record) {
+                cTask.task.runRecord(ProcessSingleResult, cTask.sinterval, cTask.hlCount.pop());
+            }
+            else {
+                assert(cTask.nextAction === TaskStateFlag.replay);
+                cTask.task.runReplay(ProcessSingleResult);
+            }
         }
     }
 }

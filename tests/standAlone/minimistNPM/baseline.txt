@@ -1,0 +1,12 @@
+Basic test 1
+{"_":[],"a":"beep","b":"boop"}
+
+Basic test 2
+{"_":["foo","bar","baz"],"x":3,"y":4,"n":5,"a":true,"b":true,"c":true,"beep":"boop"}
+
+Basic test 2
+{"_":["foo","bar","baz"],"x":3,"y":4,"n":5,"a":true,"b":true,"c":true,"beep":"boop"}
+
+Basic test 3
+{"_":["one","two","three"],"--":["four","five","--six"]}
+Done!
