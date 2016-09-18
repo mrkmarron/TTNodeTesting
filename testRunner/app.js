@@ -18,6 +18,8 @@ let passing = 0;
 let failing = 0;
 
 let standAloneTests = [
+    {path: 'asyncNPM', hlCount: [8, 100], sinterval:0},
+    {path: 'asyncNonDetNPM', hlCount: [8, 100], sinterval:0},
     {path: 'chalkNPM', hlCount: [3, 100], sinterval:0},
     {path: 'cheerioNPM', hlCount: [5, 100], sinterval:0},
     {path: 'commanderNPM', hlCount: [5, 100], sinterval:0},
@@ -36,7 +38,7 @@ let standAloneTests = [
 ];
 
 //for debugging a single test
-//standAloneTests = [{path: 'fsextraNPM', hlCount: [5, 100], sinterval:0}];
+//standAloneTests = [{path: 'asyncNonDetNPM', hlCount: [4, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {
     let rootPath = path.create(__dirname).resolve('..\\tests\\standAlone\\');

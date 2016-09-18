@@ -1,0 +1,9 @@
+{
+  "name"        : "asyncNonDetNPM",
+  "version"     : "0.1.0",
+  "description" : "NPM async application (with non-determinism) for testing TTD.",
+  "license"     : "MIT", 
+  "dependencies": {
+    "async"   : "2.0.1"
+  }
+}

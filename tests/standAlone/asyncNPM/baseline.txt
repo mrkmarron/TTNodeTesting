@@ -1,0 +1,24 @@
+Each test
+{"one":0,"two":1,"three":2}
+
+Fail each test
+Failed (as expected) with Got two
+
+Every test true
+true
+
+Every test false
+false
+
+Filter test
+[1,3]
+
+Map test
+[2,3,4]
+
+Series test
+acc is 5
+
+Parallel test
+acc is 5
+Done!
