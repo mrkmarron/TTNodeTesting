@@ -1,4 +1,5 @@
 let assert = require('assert');
+let fs = require('fs');
 let path = require('filepath');
 let chalk = require('chalk');
 
@@ -16,6 +17,8 @@ let taskList = [];
 let currentTask = 0;
 let passing = 0;
 let failing = 0;
+
+let moduleSet = new Set();
 
 let standAloneTests = [
     {path: 'asyncNPM', hlCount: [5, 100], sinterval:0},
@@ -39,16 +42,26 @@ let standAloneTests = [
 ];
 
 //for debugging a single test
-//standAloneTests = [{path: 'bluebirdNPM', hlCount: [3, 100], sinterval:0}];
+//standAloneTests = [{path: 'jsomeNPM', hlCount: [3, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {
     let rootPath = path.create(__dirname).resolve('..\\tests\\standAlone\\');
 
-    for(var i = 0; i < standAloneTests.length; ++i) {
+    for(let i = 0; i < standAloneTests.length; ++i) {
         let ctest = standAloneTests[i];
 
         let sp = rootPath.append(ctest.path);
         let st = saTest.loadTest(nodePath, sp);
+
+        let modulePath = sp.append('node_modules').path;
+        if(fs.existsSync(modulePath) && ctest.warn === undefined) {
+            let npmModules = fs.readdirSync(modulePath);
+            for (let j = 0; j < npmModules.length; ++j) {
+                if (!npmModules[j].startsWith('.')) {
+                    moduleSet.add(npmModules[j]);
+                }
+            }
+        }
 
         let ttask = {task: st, nextAction: TaskStateFlag.record, hlCount: ctest.hlCount, sinterval: ctest.sinterval};
         if(ctest.warn !== undefined) {
@@ -70,6 +83,17 @@ function ReportResults() {
         console.log(chalk.bold.green(`Passed ${passing} tests.`));
         console.log(chalk.bold.red(`Failed ${failing} tests.`));
     }
+
+    let moduleArray = Array.from(moduleSet);
+    moduleArray.sort();
+
+    let mPath = path.create(__dirname).append('moduleList.txt').path;
+    let mList = moduleArray.join('\n');
+    fs.writeFileSync(mPath, mList);
+
+    console.log('');
+    console.log(`Total modules: ${moduleArray.length}`);
+    console.log('Full module list written to moduleList.txt.');
 }
 
 function ProcessSingleResult(success) {
