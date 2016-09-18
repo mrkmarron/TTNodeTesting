@@ -1,0 +1,9 @@
+Map test
+[2,3,4]
+
+Series test
+result is 1,2
+
+Parallel test
+result is one,two
+Done!
