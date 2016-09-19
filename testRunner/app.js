@@ -27,6 +27,7 @@ let standAloneTests = [
     {path: 'chalkNPM', hlCount: [3, 100], sinterval:0},
     {path: 'cheerioNPM', hlCount: [5, 100], sinterval:0},
     {path: 'commanderNPM', hlCount: [5, 100], sinterval:0},
+    {path: 'debugNPM', hlCount: [3, 100], sinterval:0},
     {path: 'eslintNPM', hlCount: [3, 100], sinterval:0},
     {path: 'fsextraNPM', hlCount: [5, 100], sinterval:0},
     {path: 'jsdomNPM', hlCount: [3, 100], sinterval:0, warn: 'Needs multi-context support & es6 generator functions + blocked on Chakra OOS. Also add jQuery once this runs.'},
@@ -35,14 +36,16 @@ let standAloneTests = [
     {path: 'markedNPM', hlCount: [3, 100], sinterval:0},
     {path: 'minimistNPM', hlCount: [3, 100], sinterval:0},
     {path: 'momentNPM', hlCount: [3, 100], sinterval:0},
+    {path: 'pdfkitNPM', hlCount: [35, 100], sinterval:0},
     {path: 'pugNPM', hlCount: [5, 100], sinterval:0},
     {path: 'random', hlCount: [4, 100], sinterval:0},
     {path: 'uglify-js2NPM', hlCount: [4, 100], sinterval:0, warn: 'Needs multi-context support'},
+    {path: 'winstonNPM', hlCount: [4, 100], sinterval:0},
     {path: 'zlib', hlCount: [4, 100], sinterval:0}
 ];
 
 //for debugging a single test
-//standAloneTests = [{path: 'jsomeNPM', hlCount: [3, 100], sinterval:0}];
+//standAloneTests = [{path: 'pdfkitNPM', hlCount: [35], sinterval:0}];
 
 function LoadAllStandAloneTests() {
     let rootPath = path.create(__dirname).resolve('..\\tests\\standAlone\\');
@@ -92,7 +95,8 @@ function ReportResults() {
     fs.writeFileSync(mPath, mList);
 
     console.log('');
-    console.log(`Total modules: ${moduleArray.length}`);
+    console.log(`Total packages tested: ${taskList.length}.`);
+    console.log(`Total modules: ${moduleArray.length}.`);
     console.log('Full module list written to moduleList.txt.');
 }
 
