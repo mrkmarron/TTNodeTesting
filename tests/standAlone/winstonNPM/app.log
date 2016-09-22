@@ -262,3 +262,19 @@
 {"msg":"json","contents":"This file contains some text!!!","num":3,"level":"info","message":"The file data is:","timestamp":"2016-09-22T00:06:57.399Z"}
 {"level":"debug","message":"Now with debug too!!!","timestamp":"2016-09-22T00:06:57.403Z"}
 {"level":"info","message":"Query test","timestamp":"2016-09-22T00:06:57.406Z"}
+{"level":"info","message":"Async fs Exists","timestamp":"2016-09-22T05:39:10.505Z"}
+{"level":"info","message":"The file exists.","timestamp":"2016-09-22T05:39:10.536Z"}
+{"level":"info","message":"Async fs (not) Exists","timestamp":"2016-09-22T05:39:10.539Z"}
+{"level":"info","message":"The file is missing.","timestamp":"2016-09-22T05:39:10.573Z"}
+{"level":"info","message":"Async fs Read","timestamp":"2016-09-22T05:39:10.578Z"}
+{"msg":"json","contents":"This file contains some text!!!","num":3,"level":"info","message":"The file data is:","timestamp":"2016-09-22T05:39:10.663Z"}
+{"level":"debug","message":"Now with debug too!!!","timestamp":"2016-09-22T05:39:10.667Z"}
+{"level":"info","message":"Query test","timestamp":"2016-09-22T05:39:10.670Z"}
+{"level":"info","message":"Async fs Exists","timestamp":"2016-09-22T05:39:19.452Z"}
+{"level":"info","message":"The file exists.","timestamp":"2016-09-22T05:39:19.484Z"}
+{"level":"info","message":"Async fs (not) Exists","timestamp":"2016-09-22T05:39:19.487Z"}
+{"level":"info","message":"The file is missing.","timestamp":"2016-09-22T05:39:19.508Z"}
+{"level":"info","message":"Async fs Read","timestamp":"2016-09-22T05:39:19.511Z"}
+{"msg":"json","contents":"This file contains some text!!!","num":3,"level":"info","message":"The file data is:","timestamp":"2016-09-22T05:39:19.630Z"}
+{"level":"debug","message":"Now with debug too!!!","timestamp":"2016-09-22T05:39:19.633Z"}
+{"level":"info","message":"Query test","timestamp":"2016-09-22T05:39:19.637Z"}

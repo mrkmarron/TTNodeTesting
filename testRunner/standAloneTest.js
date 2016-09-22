@@ -89,14 +89,13 @@ exports.loadTest = function (nodeExePath, testDir, baselineEncoding) {
         baselineContents = baselineFile.read({sync: true, encoding: benc});
     }
 
-    let pInfo = {
-        nodeExePath: {value: nodeExePath}, 
-        name: {value: testName}, 
-        dir: {value: testDir}, 
-        exeFile: {value: exeFile}, 
-        baselineFromRecord: {value: baselineFromRecord},
-        baseline: {value: baselineContents, writable: true}
-    };
+    let obj = Object.create(testPrototype);
+    obj.nodeExePath = nodeExePath; 
+    obj.name = testName; 
+    obj.dir = testDir; 
+    obj.exeFile = exeFile; 
+    obj.baselineFromRecord = baselineFromRecord;
+    obj.baseline = baselineContents;
 
-    return Object.create(testPrototype, pInfo);
+    return obj;
 }

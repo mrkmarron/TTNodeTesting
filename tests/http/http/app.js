@@ -16,7 +16,7 @@ function handler(request, response) {
     else 
     {
         if (request.url === '/exit') {
-            handleRequestWith(request, response, 200, 'Take care now!');
+            handleRequestWith(request, response, 200, 'Exiting!');
         }
         else {
             handleRequestWith(request, response, 200, 'Unknown Command');

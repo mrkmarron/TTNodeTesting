@@ -50,32 +50,19 @@ function doHttpGet(url, cb) {
 
 function driveTest(testArray) {
     doHttpGet('/', function (bodyi) {
-        console.log(`GET / => ${bodyi}`, true);
+        //console.log(`GET / => ${bodyi}`, true);
 
         async.waterfall(
         testArray,
         function () {
             doHttpGet('/exit', function (bodye) {
-                console.log(`GET /exit => ${bodye}`, true);
+                //console.log(`GET /exit => ${bodye}`, true);
             });
         });
     });
 }
 
-var driveArray = [function (callback) {
-                    doHttpGet('/hello', function (body) {
-                        console.log(`GET /hello => ${body}`);
-                        callback(null)
-                    });
-                },
-                function (callback) {
-                    doHttpGet('/goodbye', function (body) {
-                        console.log(`GET /goodbye => ${body}`);
-                        callback(null)
-                    });
-                }];
-
-function startup(cb, tobj, sinterval, hlength) {
+function startup(cb, tobj, sinterval, hlength, driver) {
     async.series([
         //Setup a server that listens for a start msg from the test process
         function (callback) {
@@ -91,7 +78,7 @@ function startup(cb, tobj, sinterval, hlength) {
 
                 console.log('Handshake done!!!');
 
-                driveTest(driveArray);
+                driveTest(driver);
             });
 
             tobj.waitServer.listen(1338, function() {
@@ -144,10 +131,10 @@ function startup(cb, tobj, sinterval, hlength) {
 }
 
 let testPrototype = {
-    'runRecord': function (cb, sinterval, hlength) {
+    'runRecord': function (cb, sinterval, hlength, driver) {
         console.log(`Running ${chalk.bold('Record')} Test for ${chalk.bold(this.name)} with History of ${hlength}...`)
         
-        startup(cb, this, sinterval, hlength);
+        startup(cb, this, sinterval, hlength, driver);
     },
     'runReplay': function (cb) {
         console.log(`Running ${chalk.bold('Replay')} Test for ${chalk.bold(this.name)}...`)
@@ -186,6 +173,7 @@ exports.loadTest = function (nodeExePath, testDir) {
     let testName = testDir.basename();
     let exeFile = testDir.append('app.js');
     let baselineFile = testDir.append('baseline.txt');
+    let driverfile = testDir.append('driver.js');
 
     assert(exeFile.isFile(), exeFile.toString());
 
@@ -197,14 +185,17 @@ exports.loadTest = function (nodeExePath, testDir) {
         baselineContents = baselineFile.read({sync: true, encoding: 'utf8'});
     }
 
-    let pInfo = {
-        nodeExePath: {value: nodeExePath}, 
-        name: {value: testName}, 
-        dir: {value: testDir}, 
-        exeFile: {value: exeFile}, 
-        baselineFromRecord: {value: baselineFromRecord},
-        baseline: {value: baselineContents, writable: true}
-    };
+    let driverObj = require(driverfile.toString()); 
 
-    return Object.create(testPrototype, pInfo);
+    let obj = Object.create(testPrototype);
+    obj.nodeExePath = nodeExePath; 
+    obj.name = testName; 
+    obj.dir = testDir; 
+    obj.exeFile = exeFile; 
+    obj.baselineFromRecord = baselineFromRecord;
+    obj.baseline = baselineContents;
+    obj.useDriver = true;
+    obj.driver = driverObj.driver;
+
+    return obj;
 }

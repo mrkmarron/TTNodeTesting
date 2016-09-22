@@ -102,7 +102,15 @@ function LoadAllHttpTests() {
             }
         }
 
-        let ttask = {task: st, nextAction: TaskStateFlag.record, hlCount: ctest.hlCount, sinterval: ctest.sinterval};
+        let ttask = {
+            task: st, 
+            nextAction: TaskStateFlag.record, 
+            hlCount: ctest.hlCount, 
+            sinterval: ctest.sinterval, 
+            hasDriver: st.hasDriver, 
+            driver: st.driver
+        };
+
         if(ctest.warn !== undefined) {
             ttask.warn = ctest.warn;
         }
@@ -187,7 +195,12 @@ function ProcessWork() {
         }
         else {
             if (cTask.nextAction === TaskStateFlag.record) {
-                cTask.task.runRecord(ProcessSingleResult, cTask.sinterval, cTask.hlCount.pop());
+                if(cTask.task.useDriver) {
+                    cTask.task.runRecord(ProcessSingleResult, cTask.sinterval, cTask.hlCount.pop(), cTask.task.driver);
+                }
+                else {
+                    cTask.task.runRecord(ProcessSingleResult, cTask.sinterval, cTask.hlCount.pop());
+                }
             }
             else {
                 assert(cTask.nextAction === TaskStateFlag.replay);
@@ -199,7 +212,7 @@ function ProcessWork() {
 
 ////////
 
-//LoadAllStandAloneTests();
+LoadAllStandAloneTests();
 LoadAllHttpTests();
 
 ProcessWork();
