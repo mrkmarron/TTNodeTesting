@@ -1,4 +1,5 @@
 moduleList.txt
 node_modules/
 
-ouputfile.pdf
+tests/standAlone/pdfkitNPM/outfile.pdf
+tests/standAlone/winstonNPM/app.log

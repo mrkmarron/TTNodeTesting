@@ -4,8 +4,10 @@ let path = require('filepath');
 let chalk = require('chalk');
 
 let saTest = require('./standAloneTest');
+let hTest = require('./httpTest');
 
-let nodePath = path.create('C:\\Chakra\\TTNodeDebug\\Debug\\node.exe');
+//let nodePath = path.create('C:\\Chakra\\TTNodeDebug\\Debug\\node.exe');
+let nodePath = path.create('C:\\Chakra\\TTNode1_3\\Debug\\node.exe');
 
 const TaskStateFlag = {
     record: 'record',
@@ -44,8 +46,14 @@ let standAloneTests = [
     {path: 'zlib', hlCount: [4, 100], sinterval:0}
 ];
 
+let httpTests = [
+    {path: 'http', hlCount: [5, 100], sinterval:0},
+    {path: 'express', hlCount: [3, 100], sinterval:0}
+];
+
 //for debugging a single test
-//standAloneTests = [{path: 'pdfkitNPM', hlCount: [35], sinterval:0}];
+//standAloneTests = [{path: 'eslintNPM', hlCount: [3, 100], sinterval:0}];
+httpTests = [{path: 'http', hlCount: [3, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {
     let rootPath = path.create(__dirname).resolve('..\\tests\\standAlone\\');
@@ -55,6 +63,34 @@ function LoadAllStandAloneTests() {
 
         let sp = rootPath.append(ctest.path);
         let st = saTest.loadTest(nodePath, sp);
+
+        let modulePath = sp.append('node_modules').path;
+        if(fs.existsSync(modulePath) && ctest.warn === undefined) {
+            let npmModules = fs.readdirSync(modulePath);
+            for (let j = 0; j < npmModules.length; ++j) {
+                if (!npmModules[j].startsWith('.')) {
+                    moduleSet.add(npmModules[j]);
+                }
+            }
+        }
+
+        let ttask = {task: st, nextAction: TaskStateFlag.record, hlCount: ctest.hlCount, sinterval: ctest.sinterval};
+        if(ctest.warn !== undefined) {
+            ttask.warn = ctest.warn;
+        }
+
+        taskList.push(ttask);
+    }
+}
+
+function LoadAllHttpTests() {
+    let rootPath = path.create(__dirname).resolve('..\\tests\\http\\');
+
+    for(let i = 0; i < httpTests.length; ++i) {
+        let ctest = httpTests[i];
+
+        let sp = rootPath.append(ctest.path);
+        let st = hTest.loadTest(nodePath, sp);
 
         let modulePath = sp.append('node_modules').path;
         if(fs.existsSync(modulePath) && ctest.warn === undefined) {
@@ -163,6 +199,7 @@ function ProcessWork() {
 
 ////////
 
-LoadAllStandAloneTests();
+//LoadAllStandAloneTests();
+LoadAllHttpTests();
 
 ProcessWork();
