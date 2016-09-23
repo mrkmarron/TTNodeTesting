@@ -47,13 +47,13 @@ let standAloneTests = [
 ];
 
 let httpTests = [
-    {path: 'http', hlCount: [5, 100], sinterval:0},
-    {path: 'express', hlCount: [3, 100], sinterval:0}
+    {path: 'http', hlCount: [3, 100], sinterval:0},
+    {path: 'expressNPM', hlCount: [4, 100], sinterval:0}
 ];
 
 //for debugging a single test
 //standAloneTests = [{path: 'eslintNPM', hlCount: [3, 100], sinterval:0}];
-httpTests = [{path: 'http', hlCount: [3, 100], sinterval:0}];
+//httpTests = [{path: 'http', hlCount: [3, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {
     let rootPath = path.create(__dirname).resolve('..\\tests\\standAlone\\');

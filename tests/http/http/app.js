@@ -5,7 +5,7 @@ function handler(request, response) {
     response.writeHead(200, { "Content-Type": "text/html", 'Cache-control': 'no-cache' });
 
     if(request.url === '/') {
-        handleRequestWith(request, response, 200, 'Http Test Server');
+        handleRequestWith(request, response, 200, 'Http Test Server...');
     }
     else if(request.url === '/hello') {
         handleRequestWith(request, response, 200, 'Hello World!');
@@ -46,20 +46,5 @@ server.on('close', function () {
 })
 
 server.listen(1337, function () {
-    var msg = 'Handshake';
-
-    var options = {
-        host: '127.0.0.1',
-        port: 1338,
-        path: '/',
-        method: 'POST',
-        headers: {
-            'Content-Type': 'text/html',
-            'Content-Length': msg.length
-        }
-    };
-
-    var httpreq = http.request(options);
-    httpreq.write(msg);
-    httpreq.end();
+    telemetryLog('Handshake', true);
 });

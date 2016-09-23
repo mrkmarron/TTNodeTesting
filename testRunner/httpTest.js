@@ -9,18 +9,6 @@ function printTestFailMsg(msg) {
     console.log(chalk.bold.red(msg));
 } 
 
-function hardShutdown(tobj) {
-    if (tobj.cproc) {
-        tobj.cproc.kill();
-        tobj.cproc = undefined;
-    }
-
-    if (tobj.waitServer) {
-        tobj.waitServer.close();
-        tobj.waitServer = undefined;
-    }
-}
-
 function doHttpGet(url, cb) {
     var options = {
         host: '127.0.0.1',
@@ -50,84 +38,93 @@ function doHttpGet(url, cb) {
 
 function driveTest(testArray) {
     doHttpGet('/', function (bodyi) {
-        //console.log(`GET / => ${bodyi}`, true);
+        //console.log(`GET / => ${bodyi}`);
 
         async.waterfall(
         testArray,
         function () {
             doHttpGet('/exit', function (bodye) {
-                //console.log(`GET /exit => ${bodye}`, true);
+                //console.log(`GET /exit => ${bodye}`);
             });
         });
     });
 }
 
 function startup(cb, tobj, sinterval, hlength, driver) {
-    async.series([
-        //Setup a server that listens for a start msg from the test process
-        function (callback) {
-            console.log('Starting server...');
-            tobj.waitServer = http.createServer(function (request, response) {
-                if (tobj.timerId) {
-                    clearTimeout(tobj.timerId);
-                    tobj.timerId = undefined;
-                }
+    let cmd = tobj.nodeExePath.toString();
+    let args = ['--nolazy', '-TTRecord:ttlog', `-TTSnapInterval:${sinterval}`, `-TTHistoryLength:${hlength}`, tobj.exeFile.toString()];
+    let options = { cwd: tobj.nodeExePath.dir().toString() };
 
-                tobj.waitServer.close();
-                tobj.waitServer = undefined;
+    let shutDownId = undefined;
+    let cproc = cProcess.spawn(cmd, args, options);
 
-                console.log('Handshake done!!!');
-
-                driveTest(driver);
-            });
-
-            tobj.waitServer.listen(1338, function() {
-                console.log('Server running...');
-                callback(null);
-            });
-        },
-        //Startup the test process 
-        function (callback) {
-            let cmd = `${tobj.nodeExePath} --nolazy -TTRecord:ttlog -TTSnapInterval:${sinterval} -TTHistoryLength:${hlength} ${tobj.exeFile}`;
-            let options = { cwd: tobj.nodeExePath.dir().toString() };
-
-            console.log('Starting process...');
-            tobj.cproc = cProcess.exec(cmd, options, function (error, stdout, stderr) {
-                let success = false;
-                if (error) {
-                    printTestFailMsg(JSON.stringify(error));
-                }
-                else {
-                    if (tobj.baselineFromRecord) {
-                        tobj.baseline = stdout;
-                    }
-
-                    success = (tobj.baseline === stdout);
-                    if (!success) {
-                        printTestFailMsg('========');
-                        printTestFailMsg('Output:');
-                        printTestFailMsg(stdout);
-                        printTestFailMsg('========');
-                        printTestFailMsg('Expected:');
-                        printTestFailMsg(tobj.baseline);
-                    }
-                }
-
-                cb(success);
-            });
-
-            tobj.timerId = setTimeout(function () {
-                shutdown(tobj);
-            }, 2000);
-
-            callback(null);
-        }
-    ],
-    function (err, results) {
-        if (err) {
-            console.log(JSON.stringify(err));
-        }
+    cproc.on('error', function(err) {
+        printTestFailMsg(JSON.stringify(err));
     });
+
+    let stdoutResult = undefined;
+    cproc.stdout.on('data', function (data) {
+        //console.log(`stdout -> ${data}`);
+
+        if (stdoutResult === undefined) {
+            stdoutResult = '';
+
+            if (shutDownId !== undefined) {
+                clearTimeout(shutDownId);
+                shutDownId = undefined;
+            }
+
+            driveTest(driver);
+        }
+
+        stdoutResult += data;
+    });
+
+    let stderrResult = undefined;
+    cproc.stderr.on('data', function (data) {
+        console.log(`stderr -> ${data}`);
+
+        if (stderrResult === undefined) {
+            stderrResult = '';
+        }
+
+        stderrResult += data;
+    });
+
+    cproc.on('close', function (code) {
+        let success = false;
+
+        //console.log(`exit -> ${code}`);
+        if (code !== 0) {
+            printTestFailMsg(stdoutResult);
+            printTestFailMsg(stderrResult);
+        }
+        else {
+            if (tobj.baselineFromRecord) {
+                tobj.baseline = stdoutResult;
+
+                //console.log('AutoGenBaseline:');
+                //console.log(stdoutResult);
+            }
+
+            success = (tobj.baseline === stdoutResult);
+            if (!success) {
+                printTestFailMsg('========');
+                printTestFailMsg('Output:');
+                printTestFailMsg(stdoutResult);
+                printTestFailMsg('========');
+                printTestFailMsg('Expected:');
+                printTestFailMsg(tobj.baseline);
+            }
+        }
+
+        cb(success);
+    });
+
+    shutDownId = setTimeout(function () {
+        console.log('Killing process due to timeout!!!');
+        cproc.kill();
+    }, 10000);
 }
 
 let testPrototype = {

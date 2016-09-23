@@ -1,0 +1,9 @@
+Handshake
+Request: GET /
+Response: 200 Http Test Server...
+Request: GET /hello
+Response: 200 Hello World!
+Request: GET /goodbye
+Response: 200 Take care now!
+Request: GET /exit
+Response: 200 Exiting!
