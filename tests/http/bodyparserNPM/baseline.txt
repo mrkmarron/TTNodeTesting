@@ -1,0 +1,9 @@
+Handshake
+Request: GET /
+Response: 200 Express Test Server...
+Request: PUT /user1
+Response: 200 name: mark, id: 3, nlength: 3
+Request: PUT /user2
+Response: 200 name: sandeep, id: 4, nlength: 2
+Request: GET /exit
+Response: 200 Exiting!

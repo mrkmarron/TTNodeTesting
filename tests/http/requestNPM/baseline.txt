@@ -1,0 +1,7 @@
+Handshake
+Request: GET /
+Response: 200 Request Test Server...
+Request: GET /helloprxy
+Response: 200 Hello World!
+Request: GET /exit
+Response: 200 Exiting!

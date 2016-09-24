@@ -1,0 +1,10 @@
+{
+  "name"        : "bodyparserNPM",
+  "version"     : "0.1.0",
+  "description" : "NPM body-parser application for testing TTD.",
+  "license"     : "MIT", 
+  "dependencies": {
+    "express": "4.14.0",
+    "body-parser": "1.15.2"
+  }
+}
