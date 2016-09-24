@@ -47,10 +47,10 @@ let standAloneTests = [
 ];
 
 let httpTests = [
-    {path: 'http', hlCount: [3, 100], sinterval:0},
+    {path: 'bodyparserNPM', hlCount: [5, 100], sinterval:0},
     {path: 'expressNPM', hlCount: [4, 100], sinterval:0},
-    {path: 'requestNPM', hlCount: [5, 100], sinterval:0},
-    {path: 'bodyparserNPM', hlCount: [5, 100], sinterval:0}
+    {path: 'http', hlCount: [3, 100], sinterval:0},
+    {path: 'requestNPM', hlCount: [5, 100], sinterval:0}
 ];
 
 //for debugging a single test
@@ -214,7 +214,7 @@ function ProcessWork() {
 
 ////////
 
-//LoadAllStandAloneTests();
+LoadAllStandAloneTests();
 LoadAllHttpTests();
 
 ProcessWork();
