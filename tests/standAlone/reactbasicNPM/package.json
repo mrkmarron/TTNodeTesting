@@ -1,0 +1,10 @@
+{
+  "name"        : "reactbasicNPM",
+  "version"     : "0.1.0",
+  "description" : "NPM basic react application for testing TTD.",
+  "license"     : "MIT", 
+  "dependencies": {
+    "react"   : "15.3.2",
+    "react-dom" : "15.3.2"
+  }
+}

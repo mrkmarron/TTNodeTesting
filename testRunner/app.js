@@ -41,6 +41,7 @@ let standAloneTests = [
     {path: 'pdfkitNPM', hlCount: [35, 100], sinterval:0},
     {path: 'pugNPM', hlCount: [5, 100], sinterval:0},
     {path: 'random', hlCount: [4, 100], sinterval:0},
+    {path: 'reactbasicNPM', hlCount: [3, 100], sinterval:0},
     {path: 'uglify-js2NPM', hlCount: [4, 100], sinterval:0, warn: 'Needs multi-context support'},
     {path: 'winstonNPM', hlCount: [4, 100], sinterval:0},
     {path: 'zlib', hlCount: [4, 100], sinterval:0}
@@ -57,7 +58,7 @@ let httpTests = [
 ];
 
 //for debugging a single test
-//standAloneTests = [{path: 'eslintNPM', hlCount: [3, 100], sinterval:0}];
+//standAloneTests = [{path: 'reactbasicNPM', hlCount: [3, 100], sinterval:0}];
 //httpTests = [{path: 'morganNPM', hlCount: [4, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {

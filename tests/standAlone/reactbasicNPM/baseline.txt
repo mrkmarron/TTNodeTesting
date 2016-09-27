@@ -1,0 +1,12 @@
+Basic test
+<div data-reactroot="" data-reactid="1" data-react-checksum="1309021079">Hello World!</div>
+
+Children test
+<div data-reactroot="" data-reactid="1" data-react-checksum="1764371751"><h1 data-reactid="2">Hello world!</h1><p data-reactid="3">This DOM was rendered from JS.</p></div>
+
+Complex test
+<div data-reactroot="" data-reactid="1" data-react-checksum="1800964404"><h1 data-reactid="2">Hello world!</h1><form data-reactid="3"><!-- react-text: 4 -->Your name is <!-- /react-text --><input type="text" placeholder="Your name here" data-reactid="5"/></form><p data-reactid="6">The time is Sun Dec 17 1995 03:24:00 GMT-0800 (Pacific Standard Time)</p><h1 class="blue" data-reactid="7">Hello, world!</h1><button data-reactid="8">Toggle color</button></div>
+
+Global test
+<div data-reactroot="" data-reactid="1" data-react-checksum="-1059312152"><h1 data-reactid="2">Hello world!</h1><p data-reactid="3">This DOM is in the global state.</p></div>
+Done!
