@@ -1,0 +1,9 @@
+{
+  "name"        : "rockyNPM",
+  "version"     : "0.1.0",
+  "description" : "NPM rocky application for testing TTD.",
+  "license"     : "MIT", 
+  "dependencies": {
+    "rocky": "0.4.12"
+  }
+}

@@ -1,0 +1,13 @@
+Handshake
+Proxy request: /
+Request: GET /
+Response: 200 Http-Proxy Test Server...
+Proxy response: / with status 200
+Proxy request: /hello
+Request: GET /hello
+Response: 200 Hello World!
+Proxy response: /hello with status 200
+Proxy request: /exit
+Request: GET /exit
+Response: 200 Exiting!
+Proxy response: /exit with status 200
