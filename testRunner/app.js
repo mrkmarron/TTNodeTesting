@@ -53,13 +53,14 @@ let httpTests = [
     {path: 'http', hlCount: [3, 100], sinterval:0},
     {path: 'httpproxyNPM', hlCount: [4, 100], sinterval:0},
     {path: 'morganNPM', hlCount: [4, 100], sinterval:0},
+    {path: 'reactwebNPM', hlCount: [4, 100], sinterval:0},
     {path: 'requestNPM', hlCount: [5, 100], sinterval:0},
     {path: 'rockyNPM', hlCount: [4, 100], sinterval:0}
 ];
 
 //for debugging a single test
 //standAloneTests = [{path: 'reactbasicNPM', hlCount: [3, 100], sinterval:0}];
-//httpTests = [{path: 'morganNPM', hlCount: [4, 100], sinterval:0}];
+//httpTests = [{path: 'reactwebNPM', hlCount: [4, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {
     let rootPath = path.create(__dirname).resolve('..\\tests\\standAlone\\');

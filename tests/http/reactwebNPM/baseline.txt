@@ -1,0 +1,7 @@
+Handshake
+Request: GET /
+Response: 200 Express Test Server...
+<div><p>Hello world!</p><button class="countButton">#3</button></div>
+<div data-reactroot="" data-reactid="1" data-react-checksum="-1096077644"><p data-reactid="2">Hello world!</p><button class="countButton" data-reactid="3">#3</button></div>
+Request: GET /exit
+Response: 200 Exiting!
