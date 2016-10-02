@@ -30,7 +30,7 @@ let standAloneTests = [
     {path: 'cheerioNPM', hlCount: [5, 100], sinterval:0},
     {path: 'commanderNPM', hlCount: [5, 100], sinterval:0},
     {path: 'debugNPM', hlCount: [3, 100], sinterval:0},
-    {path: 'eslintNPM', hlCount: [3, 100], sinterval:0},
+    {path: 'eslintNPM', hlCount: [3, 100], sinterval:0, warn: 'Needs multi-context support'},
     {path: 'fsextraNPM', hlCount: [5, 100], sinterval:0},
     {path: 'jsdomNPM', hlCount: [3, 100], sinterval:0, warn: 'Needs multi-context support & es6 generator functions + blocked on Chakra OOS. Also add jQuery once this runs.'},
     {path: 'jshintNPM', hlCount: [3, 100], sinterval:0},
@@ -59,7 +59,7 @@ let httpTests = [
 ];
 
 //for debugging a single test
-//standAloneTests = [{path: 'reactbasicNPM', hlCount: [3, 100], sinterval:0}];
+//standAloneTests = [{path: 'eslintNPM', hlCount: [3, 100], sinterval:0}];
 //httpTests = [{path: 'reactwebNPM', hlCount: [4, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {
