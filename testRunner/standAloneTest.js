@@ -23,17 +23,21 @@ let testPrototype = {
             }
             else {
                 if(testInfo.baselineFromRecord) {
-                    testInfo.baseline = stdout;
+                    testInfo.baseline = stdout.toString();
                 }
                 
-                success = (testInfo.baseline === stdout);
+                let wsre = new RegExp('\\s+', 'g'); 
+                let tiNorm = testInfo.baseline.replace(wsre, ' ');
+                let soNorm = stdout.toString().replace(wsre, ' '); 
+
+                success = (tiNorm === soNorm);
                 if(!success) {
                     printTestFailMsg('========');
                     printTestFailMsg('Output:');
-                    printTestFailMsg(stdout);
+                    printTestFailMsg(soNorm);
                     printTestFailMsg('========');
                     printTestFailMsg('Expected:');
-                    printTestFailMsg(testInfo.baseline);
+                    printTestFailMsg(tiNorm);
                 }
             }
 
@@ -53,17 +57,21 @@ let testPrototype = {
                 printTestFailMsg(JSON.stringify(error));
             }
             else {
-                let startPos = (baseline.length - stdout.length);
-                let baseTail = baseline.substr(startPos);
-                success = (baseTail.length > 0) && (baseTail === stdout);
+                let wsre = new RegExp('\\s+', 'g'); 
+                let bNorm = baseline.replace(wsre, ' ');
+                let soNorm = stdout.toString().replace(wsre, ' '); 
 
+                let startPos = (bNorm.length - soNorm.length);
+                let bTail = bNorm.substr(startPos);
+
+                success = (bTail.length > 0) && (bTail === soNorm);
                 if(!success) {
                     printTestFailMsg('========');
                     printTestFailMsg('Output:');
-                    printTestFailMsg(stdout);
+                    printTestFailMsg(soNorm);
                     printTestFailMsg('========');
                     printTestFailMsg('Expected:');
-                    printTestFailMsg(baseline);
+                    printTestFailMsg(bTail);
                     printTestFailMsg('');
                 }
             }
