@@ -1,0 +1,8 @@
+{
+  "name"        : "vmNPM",
+  "version"     : "0.1.0",
+  "description" : "NPM vm application for testing TTD.",
+  "license"     : "MIT", 
+  "dependencies": {
+  }
+}
