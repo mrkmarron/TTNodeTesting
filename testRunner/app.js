@@ -6,7 +6,7 @@ let chalk = require('chalk');
 let saTest = require('./standAloneTest');
 let hTest = require('./httpTest');
 
-//let nodePath = path.create('C:\\Chakra\\TTNodeDebug\\Debug\\node.exe');
+//let nodePath = path.create('C:\\Users\\marron\\Desktop\\node-chakracore-debugging-chakracore13-mm\\Debug\\node.exe');
 let nodePath = path.create('C:\\Chakra\\TTNode1_3\\Debug\\node.exe');
 
 const TaskStateFlag = {
@@ -38,7 +38,7 @@ let standAloneTests = [
     {path: 'markedNPM', hlCount: [3, 100], sinterval:0},
     {path: 'minimistNPM', hlCount: [3, 100], sinterval:0},
     {path: 'momentNPM', hlCount: [3, 100], sinterval:0},
-    {path: 'pdfkitNPM', hlCount: [35, 100], sinterval:0},
+    {path: 'pdfkitNPM', hlCount: [3, 100], sinterval:20},
     {path: 'pugNPM', hlCount: [5, 100], sinterval:0},
     {path: 'random', hlCount: [4, 100], sinterval:0},
     {path: 'reactbasicNPM', hlCount: [3, 100], sinterval:0},
@@ -60,7 +60,7 @@ let httpTests = [
 ];
 
 //for debugging a single test
-//standAloneTests = [{path: 'vm', hlCount: [4, 100], sinterval:0}];
+//standAloneTests = [{path: 'pdfkitNPM', hlCount: [3, 100], sinterval:20}];
 //httpTests = [{path: 'reactwebNPM', hlCount: [4, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {

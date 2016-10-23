@@ -37,19 +37,6 @@ function drawTriangleTest(cb) {
     cb();
 }
 
-function drawSVGTest(cb) {
-    telemetryLog('Draw SVG test', true);
-
-    //# Apply some transforms and render an SVG path with the 'even-odd' fill rule
-    doc.scale(0.6)
-        .translate(470, -380)
-        .path('M 250,75 L 323,301 131,161 369,161 177,301 z')
-        .fill('red', 'even-odd')
-        .restore();
-
-    cb();
-}
-
 function addLinkTest(cb) {
     telemetryLog('Link test', true);
 
@@ -75,7 +62,7 @@ function finalizeTest(cb) {
 ////////
 
 var wlPos = 0;
-var worklist = [addFontAndPageTest, drawTriangleTest, drawSVGTest, addLinkTest, finalizeTest];
+var worklist = [addFontAndPageTest, drawTriangleTest, addLinkTest, finalizeTest];
 
 function Process() {
     if(wlPos === worklist.length) {
