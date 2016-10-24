@@ -19,6 +19,8 @@ let testPrototype = {
         cProcess.exec(cmd, options, function(error, stdout, stderr) {
             let success = false;
             if(error) {
+                console.log(`stderr: ${stderr}`);
+                console.log(`stdout: ${stdout}`);
                 printTestFailMsg(JSON.stringify(error));
             }
             else {

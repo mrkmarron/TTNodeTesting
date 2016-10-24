@@ -60,7 +60,7 @@ let httpTests = [
 ];
 
 //for debugging a single test
-//standAloneTests = [{path: 'pdfkitNPM', hlCount: [4], sinterval:20}];
+//standAloneTests = [{path: 'pdfkitNPM', hlCount: [4, 100], sinterval:20}];
 //httpTests = [{path: 'reactwebNPM', hlCount: [4, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {
