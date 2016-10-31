@@ -38,7 +38,7 @@ let standAloneTests = [
     {path: 'markedNPM', hlCount: [3, 100], sinterval:0},
     {path: 'minimistNPM', hlCount: [3, 100], sinterval:0},
     {path: 'momentNPM', hlCount: [3, 100], sinterval:0},
-    {path: 'pdfkitNPM', hlCount: [4, 100], sinterval:20},
+    {path: 'pdfkitNPM', hlCount: [35, 100], sinterval:0},
     {path: 'pugNPM', hlCount: [5, 100], sinterval:0},
     {path: 'random', hlCount: [4, 100], sinterval:0},
     {path: 'reactbasicNPM', hlCount: [3, 100], sinterval:0},
@@ -60,7 +60,7 @@ let httpTests = [
 ];
 
 //for debugging a single test
-//standAloneTests = [{path: 'pdfkitNPM', hlCount: [4, 100], sinterval:20}];
+//standAloneTests = [{path: 'pdfkitNPM', hlCount: [50, 100], sinterval:0}];
 //httpTests = [{path: 'reactwebNPM', hlCount: [4, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {
