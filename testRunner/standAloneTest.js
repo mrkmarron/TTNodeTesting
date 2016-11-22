@@ -61,7 +61,7 @@ let testPrototype = {
             else {
                 let wsre = new RegExp('\\s+', 'g'); 
                 let bNorm = baseline.replace(wsre, ' ');
-                let soNorm = stdout.toString().replace(wsre, ' '); 
+                let soNorm = stdout.toString().replace('Reached end of Execution -- Exiting.', '').replace(wsre, ' '); 
 
                 let startPos = (bNorm.length - soNorm.length);
                 let bTail = bNorm.substr(startPos);
