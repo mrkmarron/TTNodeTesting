@@ -1,5 +1,6 @@
 moduleList.txt
 node_modules/
+tests/standAlone/fsextraNPM/testDir/
 
 tests/standAlone/pdfkitNPM/outfile.pdf
 tests/standAlone/winstonNPM/app.log
