@@ -6,8 +6,7 @@ let chalk = require('chalk');
 let saTest = require('./standAloneTest');
 let hTest = require('./httpTest');
 
-//let nodePath = path.create('C:\\Users\\marron\\Desktop\\node-chakracore-debugging-chakracore13-mm\\Debug\\node.exe');
-let nodePath = path.create('C:\\Chakra\\TTNode1_3\\Debug\\node.exe');
+let nodePath = path.create('C:\\Chakra\\TTNode\\Debug\\node.exe');
 
 const TaskStateFlag = {
     record: 'record',
@@ -60,7 +59,7 @@ let httpTests = [
 ];
 
 //for debugging a single test
-//standAloneTests = [{path: 'pdfkitNPM', hlCount: [50, 100], sinterval:0}];
+standAloneTests = [{path: 'reactbasicNPM', hlCount: [3, 100], sinterval:0}];
 //httpTests = [{path: 'reactwebNPM', hlCount: [4, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {
@@ -221,6 +220,6 @@ function ProcessWork() {
 ////////
 
 LoadAllStandAloneTests();
-LoadAllHttpTests();
+//LoadAllHttpTests();
 
 ProcessWork();

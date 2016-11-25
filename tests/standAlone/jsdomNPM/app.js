@@ -1,6 +1,7 @@
+let path = require('path');
 let jsdom = require('jsdom');
 
-let htmlf1 = `${__dirname}\\test1.html`;
+let htmlf1 = __dirname + path.sep + 'test1.html';
 
 function basicTest(cb) {
     console.log('Basic test', true);

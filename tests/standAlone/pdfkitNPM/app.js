@@ -1,7 +1,8 @@
+var path = require('path');
 var fs = require('fs');
 var PDFDocument = require('pdfkit');
 
-let pdffile = __dirname + '\\outfile.pdf'
+let pdffile = __dirname + path.sep + 'outfile.pdf'
 let doc = undefined;
 
 function addFontAndPageTest(cb) {

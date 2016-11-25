@@ -1,3 +1,4 @@
+var path = require('path');
 
 function tlog(msg) {
     global.telemetryLog(msg, true);
@@ -8,10 +9,10 @@ process.stderr.write = tlog;
 var winston = require('winston');
 var fs = require('fs');
 
-let testfile = __dirname + '\\testfile.txt'
-let testfileMissing = __dirname + '\\testfileMissing.txt'
+let testfile = __dirname + path.sep + 'testfile.txt'
+let testfileMissing = __dirname + path.sep + 'testfileMissing.txt'
 
-let logfile = __dirname + '\\app.log';
+let logfile = __dirname + path.sep + 'app.log';
 winston.add(winston.transports.File, { filename: logfile });
 
 function basicTest1(cb) {

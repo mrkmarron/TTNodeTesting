@@ -1,9 +1,9 @@
 var path = require('path');
 var fsextra = require('fs-extra');
 
-let testDir = __dirname + '\\testDir\\';
-let dir1 = testDir + 'dir1\\';
-let dir2 = testDir + 'dir2\\';
+let testDir = __dirname + path.sep + 'testDir' + path.sep;
+let dir1 = testDir + 'dir1' + path.sep;
+let dir2 = testDir + 'dir2' + path.sep;
 
 let srcFile1 = dir1 + 'file1.json';
 let srcFile2 = dir1 + 'file2.json';
@@ -11,8 +11,8 @@ let srcFile2 = dir1 + 'file2.json';
 let dstFile1 = dir2 + 'filex1.json';
 let dstFile2 = dir2 + 'filex2.json';
 
-let notExistsSrcFile = __dirname + '\\doesNotExistSrc.txt';
-let notExistsDstFile = __dirname + '\\doesNotExistDst.txt';
+let notExistsSrcFile = __dirname + path.sep + 'doesNotExistSrc.txt';
+let notExistsDstFile = __dirname + path.sep + 'doesNotExistDst.txt';
 
 function existsSyncTest(cb) {
     telemetryLog('Exists sync test', true);

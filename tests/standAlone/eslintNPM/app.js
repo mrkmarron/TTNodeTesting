@@ -1,3 +1,4 @@
+let path = require('path');
 let eslint = require('eslint');
 
 function basicTestClean(cb) {
@@ -35,7 +36,7 @@ function singleFileTestClean(cb) {
         rules: { semi: 2, curly: 2, eqeqeq: 2 }
     });
 
-    var messages = cli.executeOnFiles([__dirname + "\\clean.js"]);
+    var messages = cli.executeOnFiles([__dirname + path.sep + "clean.js"]);
 
     telemetryLog(`${JSON.stringify(messages)}`, true); // ... 
 
@@ -51,7 +52,7 @@ function singleFileTestReport(cb) {
         rules: { semi: 2, curly: 2, eqeqeq: 2 }
     });
 
-    var messages = cli.executeOnFiles([__dirname + "\\report.js"]);
+    var messages = cli.executeOnFiles([__dirname + path.sep + "report.js"]);
 
     telemetryLog(`${JSON.stringify(messages)}`, true); // ...  
 
@@ -67,7 +68,7 @@ function combinedFileTest(cb) {
         rules: { semi: 2, curly: 2, eqeqeq: 2 }
     });
 
-    var messages = cli.executeOnFiles([__dirname + "\\clean.js", __dirname + "\\report.js"]);
+    var messages = cli.executeOnFiles([__dirname + path.sep + "clean.js", __dirname + path.sep + "report.js"]);
 
     telemetryLog(`${JSON.stringify(messages)}`, true); // ...  
 

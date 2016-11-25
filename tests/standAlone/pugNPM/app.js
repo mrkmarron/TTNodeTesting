@@ -1,9 +1,10 @@
+var path = require('path');
 var pug = require('pug');
 
 function renderStaticTest(cb) {
     telemetryLog('Basic test', true);
 
-    var html = pug.renderFile(__dirname + '\\pugBasic.pug');
+    var html = pug.renderFile(__dirname + path.sep + 'pugBasic.pug');
     telemetryLog(`${html}`, true); // ... 
 
     cb();
@@ -35,7 +36,7 @@ var compiledLoopFn = undefined;
 function loopCompileTest(cb) {
     telemetryLog('Loop compile test', true);
 
-    compiledLoopFn = pug.compileFile(__dirname + '\\loopCode.pug');
+    compiledLoopFn = pug.compileFile(__dirname + path.sep + 'loopCode.pug');
 
     cb();
 }
@@ -52,7 +53,7 @@ function loopExecTest(cb) {
 function renderIncludesTest(cb) {
     telemetryLog('Includes test', true);
 
-    var html = pug.renderFile(__dirname + '\\index.pug');
+    var html = pug.renderFile(__dirname + path.sep + 'index.pug');
     telemetryLog(`${html}`, true); // ... 
 
     cb();

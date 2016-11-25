@@ -1,6 +1,6 @@
 var zlib = require("zlib");
 
-var rawText = `Hello World! -- ${new Date('September 12, 2016 11:06:00')}`;
+var rawText = `Hello World! -- ${new Date('September 12, 2016 11:06:00').toISOString()}`;
 var compressedText = undefined;
 
 function compressDataTest(cb) {

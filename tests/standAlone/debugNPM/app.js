@@ -1,3 +1,4 @@
+var path = require('path');
 
 process.env.DEBUG = 'fs';
 
@@ -9,8 +10,8 @@ function tlog(msg) {
 }
 debug.log = tlog;
 
-let testfile = __dirname + '\\testfile.txt'
-let testfileMissing = __dirname + '\\testfileMissing.txt'
+let testfile = __dirname + path.sep + 'testfile.txt'
+let testfileMissing = __dirname + path.sep + 'testfileMissing.txt'
 
 function basicTest1(cb) {
     telemetryLog('Basic test 1', true);

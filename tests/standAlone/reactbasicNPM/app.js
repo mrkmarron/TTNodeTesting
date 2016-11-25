@@ -46,7 +46,7 @@ function complexTest(cb) {
           placeholder: 'Your name here'
         })
       ),
-      React.DOM.p(null, 'The time is ' + new Date('December 17, 1995 03:24:00')),
+      React.DOM.p(null, 'The time is ' + new Date('December 17, 1995 03:24:00').toISOString()),
       React.DOM.h1({
         className: toggled ? 'red' : 'blue'
       }, 'Hello, world!'),
