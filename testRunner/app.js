@@ -1,5 +1,6 @@
 let assert = require('assert');
 let fs = require('fs');
+let cpath = require('path');
 let path = require('filepath');
 let chalk = require('chalk');
 
@@ -7,6 +8,7 @@ let saTest = require('./standAloneTest');
 let hTest = require('./httpTest');
 
 let nodePath = path.create('C:\\Chakra\\TTNode\\Debug\\node.exe');
+console.log(`Node path is: "${nodePath}" -- edit app.js to change.`);
 
 const TaskStateFlag = {
     record: 'record',
@@ -59,11 +61,11 @@ let httpTests = [
 ];
 
 //for debugging a single test
-standAloneTests = [{path: 'reactbasicNPM', hlCount: [3, 100], sinterval:0}];
+//standAloneTests = [{path: 'reactbasicNPM', hlCount: [3, 100], sinterval:0}];
 //httpTests = [{path: 'reactwebNPM', hlCount: [4, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {
-    let rootPath = path.create(__dirname).resolve('..\\tests\\standAlone\\');
+    let rootPath = path.create(__dirname).resolve('..' + cpath.sep + 'tests' + cpath.sep + 'standAlone' + cpath.sep);
 
     for(let i = 0; i < standAloneTests.length; ++i) {
         let ctest = standAloneTests[i];
@@ -91,7 +93,7 @@ function LoadAllStandAloneTests() {
 }
 
 function LoadAllHttpTests() {
-    let rootPath = path.create(__dirname).resolve('..\\tests\\http\\');
+    let rootPath = path.create(__dirname).resolve('..' + cpath.sep + 'tests' + cpath.sep + 'http' + cpath.sep);
 
     for(let i = 0; i < httpTests.length; ++i) {
         let ctest = httpTests[i];
@@ -220,6 +222,6 @@ function ProcessWork() {
 ////////
 
 LoadAllStandAloneTests();
-//LoadAllHttpTests();
+LoadAllHttpTests();
 
 ProcessWork();
