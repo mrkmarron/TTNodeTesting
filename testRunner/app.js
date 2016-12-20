@@ -26,6 +26,7 @@ let moduleSet = new Set();
 let standAloneTests = [
     {path: 'asyncNPM', hlCount: [5, 100], sinterval:0},
     {path: 'asyncNonDetNPM', hlCount: [3, 100], sinterval:0},
+    {path: 'bunyanNPM', hlCount: [4, 100], sinterval:0},
     {path: 'bluebirdNPM', hlCount: [3, 100], sinterval:0},
     {path: 'chalkNPM', hlCount: [3, 100], sinterval:0},
     {path: 'cheerioNPM', hlCount: [5, 100], sinterval:0},
@@ -61,7 +62,7 @@ let httpTests = [
 ];
 
 //for debugging a single test
-//standAloneTests = [{path: 'reactbasicNPM', hlCount: [3, 100], sinterval:0}];
+//standAloneTests = [{path: 'bunyanNPM', hlCount: [4, 100], sinterval:0}];
 //httpTests = [{path: 'reactwebNPM', hlCount: [4, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {
