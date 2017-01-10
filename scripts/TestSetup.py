@@ -9,12 +9,12 @@ ignore_list = ['.git', '.vscode']
 def install_packages(current_path):
     cwd_path = os.getcwd()
 
-    print "Installing packages for '%s'..." % os.path.basename(current_path)
+    print("Installing packages for '%s'..." % os.path.basename(current_path))
     os.chdir(current_path)
     subprocess.call("npm install", shell=True)
     os.chdir(cwd_path)
 
-    print "...done."
+    print("...done.")
     pass
 
 def process_directory(current_path):
