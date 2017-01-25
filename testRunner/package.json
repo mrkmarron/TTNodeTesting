@@ -1,0 +1,12 @@
+{
+  "name"        : "testrunner",
+  "version"     : "0.1.0",
+  "description" : "Test runner for TTD/Node code.",
+  "license"     : "MIT", 
+  "dependencies": {
+    "async"   : "*",
+    "chalk"   : "*",
+    "filepath": "*",
+    "fs-extra": "*"
+  }
+}
