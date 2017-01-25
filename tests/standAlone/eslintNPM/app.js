@@ -1,4 +1,10 @@
 let path = require('path');
+
+process.on('exit', function () {
+    let logdir = path.normalize(__dirname + path.sep + '..' + path.sep + '..' + path.sep + '..' + path.sep + '_logDir' + path.sep);
+    emitTTDLog(logdir);
+});
+
 let eslint = require('eslint');
 
 function basicTestClean(cb) {

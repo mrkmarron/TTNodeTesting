@@ -1,3 +1,10 @@
+var path = require('path');
+
+process.on('exit', function () {
+    let logdir = path.normalize(__dirname + path.sep + '..' + path.sep + '..' + path.sep + '..' + path.sep + '_logDir' + path.sep);
+    emitTTDLog(logdir);
+});
+
 var zlib = require("zlib");
 
 var rawText = `Hello World! -- ${new Date('September 12, 2016 11:06:00').toISOString()}`;

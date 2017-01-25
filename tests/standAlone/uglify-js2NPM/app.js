@@ -1,3 +1,10 @@
+var path = require('path');
+
+process.on('exit', function () {
+    var logdir = path.normalize(__dirname + path.sep + '..' + path.sep + '..' + path.sep + '..' + path.sep + '_logDir' + path.sep);
+    emitTTDLog(logdir);
+});
+
 var UglifyJS = require("uglify-js2");
 
 function uglify(cb) {

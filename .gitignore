@@ -3,3 +3,5 @@ node_modules/
 
 tests/standAlone/pdfkitNPM/outfile.pdf
 tests/standAlone/winstonNPM/app.log
+
+_logDir/
