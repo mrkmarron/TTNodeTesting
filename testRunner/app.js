@@ -34,6 +34,7 @@ let standAloneTests = [
     {path: 'commanderNPM', hlCount: [6, 100], sinterval:0},
     {path: 'debugNPM', hlCount: [4, 100], sinterval:0},
     {path: 'eslintNPM', hlCount: [4, 100], sinterval:0},
+    {path: 'fs', hlCount: [5, 100], sinterval:0},
     {path: 'fsextraNPM', hlCount: [6, 100], sinterval:0},
     {path: 'jsdomNPM', hlCount: [4, 100], sinterval:0, warn: 'Needs es6 generator functions. Also add jQuery once this runs.'},
     {path: 'jshintNPM', hlCount: [4, 100], sinterval:0},
@@ -63,7 +64,7 @@ let httpTests = [
 ];
 
 //for debugging a single test
-//standAloneTests = [{path: 'uglify-js2NPM', hlCount: [5, 100], sinterval:0}];
+//standAloneTests = [{path: 'fs', hlCount: [6, 100], sinterval:0}];
 //httpTests = [{path: 'reactwebNPM', hlCount: [5, 100], sinterval:0}];
 
 function LoadAllStandAloneTests() {

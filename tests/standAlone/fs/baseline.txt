@@ -1,0 +1,46 @@
+RealPath async test
+resolvedPathLast=n
+nodotdot=-1
+
+ReadJson sync test
+databuff length=25 databuff[0]=123
+fulldata={
+  "name": "fs-extra"
+}
+
+
+ReadJson async test
+databuff length=25 databuff[0]=123
+fulldata={
+  "name": "fs-extra"
+}
+
+
+ReadJson encoding sync test
+string length=25 string[0]={
+fulldata={
+  "name": "fs-extra"
+}
+
+
+ReadJson encoding async test
+string length=25 string[0]={
+fulldata={
+  "name": "fs-extra"
+}
+
+
+Access async test
+Ok!
+
+ReadJson file event test
+chunk length=25 chunk[0]=123
+fulldata={
+  "name": "fs-extra"
+}
+
+Read complete.
+
+Access async test
+Ok!
+Done!
