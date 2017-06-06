@@ -1,8 +1,8 @@
 {
-  "name"        : "expressNPM",
-  "version"     : "0.1.0",
-  "description" : "NPM express application for testing TTD.",
-  "license"     : "MIT", 
+  "name": "expressNPM",
+  "version": "0.1.0",
+  "description": "NPM express application for testing TTD.",
+  "license": "MIT",
   "dependencies": {
     "express": "4.14.0"
   }

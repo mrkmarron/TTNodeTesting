@@ -1,9 +1,9 @@
 {
-  "name"        : "eslintNPM",
-  "version"     : "0.1.0",
-  "description" : "NPM eslint application for testing TTD.",
-  "license"     : "MIT", 
+  "name": "eslintNPM",
+  "version": "0.1.0",
+  "description": "NPM eslint application for testing TTD.",
+  "license": "MIT",
   "dependencies": {
-    "eslint"   : "3.5.0"
+    "eslint": "3.5.0"
   }
 }

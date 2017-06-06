@@ -1,10 +1,10 @@
 {
-  "name"        : "morganNPM",
-  "version"     : "0.1.0",
-  "description" : "NPM morgan application for testing TTD.",
-  "license"     : "MIT", 
+  "name": "morganNPM",
+  "version": "0.1.0",
+  "description": "NPM morgan application for testing TTD.",
+  "license": "MIT",
   "dependencies": {
     "express": "4.14.0",
-    "morgan": "1.7.0" 
+    "morgan": "1.7.0"
   }
 }

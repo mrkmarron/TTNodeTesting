@@ -1,9 +1,9 @@
 {
-  "name"        : "winstonNPM",
-  "version"     : "0.1.0",
-  "description" : "NPM winston application for testing TTD.",
-  "license"     : "MIT", 
+  "name": "winstonNPM",
+  "version": "0.1.0",
+  "description": "NPM winston application for testing TTD.",
+  "license": "MIT",
   "dependencies": {
-    "winston"   : "2.2.0"
+    "winston": "2.2.0"
   }
 }

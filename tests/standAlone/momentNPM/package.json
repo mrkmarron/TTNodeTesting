@@ -1,9 +1,9 @@
 {
-  "name"        : "momentNPM",
-  "version"     : "0.1.0",
-  "description" : "NPM moment application for testing TTD.",
-  "license"     : "MIT", 
+  "name": "momentNPM",
+  "version": "0.1.0",
+  "description": "NPM moment application for testing TTD.",
+  "license": "MIT",
   "dependencies": {
-    "moment"   : "2.15.0"
+    "moment": "2.15.0"
   }
 }

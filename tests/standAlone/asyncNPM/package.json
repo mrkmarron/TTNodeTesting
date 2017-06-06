@@ -1,9 +1,9 @@
 {
-  "name"        : "asyncNPM",
-  "version"     : "0.1.0",
-  "description" : "NPM async application for testing TTD.",
-  "license"     : "MIT", 
+  "name": "asyncNPM",
+  "version": "0.1.0",
+  "description": "NPM async application for testing TTD.",
+  "license": "MIT",
   "dependencies": {
-    "async"   : "2.0.1"
+    "async": "2.0.1"
   }
 }

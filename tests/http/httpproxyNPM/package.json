@@ -1,8 +1,8 @@
 {
-  "name"        : "httpproxyNPM",
-  "version"     : "0.1.0",
-  "description" : "NPM http-request application for testing TTD.",
-  "license"     : "MIT", 
+  "name": "httpproxyNPM",
+  "version": "0.1.0",
+  "description": "NPM http-request application for testing TTD.",
+  "license": "MIT",
   "dependencies": {
     "http-proxy": "1.15.1"
   }
