@@ -1,9 +1,9 @@
 {
-  "name"        : "chalkNPM",
-  "version"     : "0.1.0",
-  "description" : "NPM chalk application for testing TTD.",
-  "license"     : "MIT", 
+  "name": "chalkNPM",
+  "version": "0.1.0",
+  "description": "NPM chalk application for testing TTD.",
+  "license": "MIT",
   "dependencies": {
-    "chalk"   : "1.1.3"
+    "chalk": "1.1.3"
   }
 }

@@ -1,8 +1,8 @@
 {
-  "name"        : "bunyanNPM",
-  "version"     : "0.1.0",
-  "description" : "NPM bunyan application for testing TTD.",
-  "license"     : "MIT", 
+  "name": "bunyanNPM",
+  "version": "0.1.0",
+  "description": "NPM bunyan application for testing TTD.",
+  "license": "MIT",
   "dependencies": {
     "bunyan": "1.8.5"
   }

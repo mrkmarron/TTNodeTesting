@@ -1,9 +1,9 @@
 {
-  "name"        : "minimistNPM",
-  "version"     : "0.1.0",
-  "description" : "NPM minimist application for testing TTD.",
-  "license"     : "MIT", 
+  "name": "minimistNPM",
+  "version": "0.1.0",
+  "description": "NPM minimist application for testing TTD.",
+  "license": "MIT",
   "dependencies": {
-    "minimist"   : "1.2.0"
+    "minimist": "1.2.0"
   }
 }

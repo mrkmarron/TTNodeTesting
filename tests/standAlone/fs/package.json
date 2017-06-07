@@ -1,8 +1,7 @@
 {
-  "name"        : "fsNPM",
-  "version"     : "0.1.0",
-  "description" : "NPM fs application for testing TTD.",
-  "license"     : "MIT", 
-  "dependencies": {
-  }
+  "name": "fsNPM",
+  "version": "0.1.0",
+  "description": "NPM fs application for testing TTD.",
+  "license": "MIT",
+  "dependencies": {}
 }

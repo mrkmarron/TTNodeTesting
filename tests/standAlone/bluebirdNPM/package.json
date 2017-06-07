@@ -1,9 +1,9 @@
 {
-  "name"        : "bluebirdNPM",
-  "version"     : "0.1.0",
-  "description" : "NPM bluebird application for testing TTD.",
-  "license"     : "MIT", 
+  "name": "bluebirdNPM",
+  "version": "0.1.0",
+  "description": "NPM bluebird application for testing TTD.",
+  "license": "MIT",
   "dependencies": {
-    "bluebird"   : "3.4.6"
+    "bluebird": "3.4.6"
   }
 }

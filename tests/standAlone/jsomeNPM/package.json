@@ -1,9 +1,9 @@
 {
-  "name"        : "jsomeNPM",
-  "version"     : "0.1.0",
-  "description" : "NPM jsome application for testing TTD.",
-  "license"     : "MIT", 
+  "name": "jsomeNPM",
+  "version": "0.1.0",
+  "description": "NPM jsome application for testing TTD.",
+  "license": "MIT",
   "dependencies": {
-    "jsome"   : "2.3.25"
+    "jsome": "2.3.25"
   }
 }

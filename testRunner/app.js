@@ -4,12 +4,22 @@ let fsExtra = require('fs-extra');
 let cpath = require('path');
 let path = require('filepath');
 let chalk = require('chalk');
+let program = require('commander');
 
 let saTest = require('./standAloneTest');
 let hTest = require('./httpTest');
 
-let nodePath = path.create('C:\\Chakra\\TTNode\\Debug\\node.exe');
-console.log(`Node path is: "${nodePath}" -- edit app.js to change.`);
+program
+    .option('-n, --node <node>', 'The path to the node executable',)
+    .parse(process.argv);
+
+if (!program.node) {
+    console.error(`Node path must be specified`);
+    process.exit(1);
+}
+
+let nodePath = path.create(program.node);
+console.log(`Node path is: "${nodePath}"`);
 
 const TaskStateFlag = {
     record: 'record',

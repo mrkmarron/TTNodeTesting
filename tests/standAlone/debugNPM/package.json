@@ -1,9 +1,9 @@
 {
-  "name"        : "debugNPM",
-  "version"     : "0.1.0",
-  "description" : "NPM debug application for testing TTD.",
-  "license"     : "MIT", 
+  "name": "debugNPM",
+  "version": "0.1.0",
+  "description": "NPM debug application for testing TTD.",
+  "license": "MIT",
   "dependencies": {
-    "debug"   : "2.2.0"
+    "debug": "2.2.0"
   }
 }

@@ -1,9 +1,9 @@
 {
-  "name"        : "markedNPM",
-  "version"     : "0.1.0",
-  "description" : "NPM marked application for testing TTD.",
-  "license"     : "MIT", 
+  "name": "markedNPM",
+  "version": "0.1.0",
+  "description": "NPM marked application for testing TTD.",
+  "license": "MIT",
   "dependencies": {
-    "marked"   : "0.3.6"
+    "marked": "0.3.6"
   }
 }

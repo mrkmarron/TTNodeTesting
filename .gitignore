@@ -1,4 +1,5 @@
 moduleList.txt
+package-lock.json
 node_modules/
 
 tests/standAlone/pdfkitNPM/outfile.pdf
