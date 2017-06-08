@@ -6,15 +6,16 @@ const path = require('filepath');
 const program = require('commander');
 
 const BaseTest = require('./lib/base-test');
-const StandAloneTest = require('./lib/stand-alone-test');
 const HttpTest = require('./lib/http-test');
+const StandAloneTest = require('./lib/stand-alone-test');
+const junitReport = require('./lib/junit-report');
 
 program
     .option('-n, --node <path>', 'Path to the node executable')
     .option('-x, --junit [path]', 'Output results in junit xml with optional file path')
     .parse(process.argv);
 
-let nodePath = path.create(program.node ? program.node : process.execPath);
+const nodePath = path.create(program.node ? program.node : process.execPath);
 
 if(!fs.existsSync(nodePath.toString())) {
     console.error(`Invalid node path: "${nodePath}"`);
@@ -23,15 +24,15 @@ if(!fs.existsSync(nodePath.toString())) {
 
 console.log(`Node path is: "${nodePath}"`);
 
-let taskList = [];
+const taskList = [];
 let currentTask = 0;
 let passing = 0;
 let skipped = 0;
 let failing = 0;
 
-let moduleSet = new Set();
+const moduleSet = new Set();
 
-const standAloneTests = [
+let standAloneTests = [
     {path: 'asyncNPM', hlCount: [6, 100], sinterval:0},
     {path: 'asyncNonDetNPM', hlCount: [4, 100], sinterval:0},
     {path: 'bunyanNPM', hlCount: [5, 100], sinterval:0},
@@ -59,7 +60,7 @@ const standAloneTests = [
     {path: 'zlib', hlCount: [5, 100], sinterval:0}
 ];
 
-const httpTests = [
+let httpTests = [
     {path: 'bodyparserNPM', hlCount: [6, 100], sinterval:0},
     {path: 'expressNPM', hlCount: [5, 100], sinterval:0},
     {path: 'http', hlCount: [4, 100], sinterval:0},
@@ -75,7 +76,7 @@ const httpTests = [
 ////httpTests = [{path: 'reactwebNPM', hlCount: [5, 100], sinterval:0}];
 
 function logModules(testDir) {
-    let modulePath = testDir.append('node_modules').path;
+    const modulePath = testDir.append('node_modules').path;
     if (fs.existsSync(modulePath)) {
         fs.readdirSync(modulePath).forEach((npmModule) => {
             if (!npmModule.startsWith('.')) {
@@ -86,15 +87,15 @@ function logModules(testDir) {
 }
 
 function LoadTests(subDir, testList, testClass) {
-    let rootPath = path.create(__dirname).resolve(
+    const rootPath = path.create(__dirname).resolve(
         `..${cpath.sep}tests${cpath.sep}${subDir}${cpath.sep}`);
 
     for (let i = 0; i < testList.length; ++i) {
-        let testDef = testList[i];
-        let testDir = rootPath.append(testDef.path);
+        const testDef = testList[i];
+        const testDir = rootPath.append(testDef.path);
 
         for (let j = 0; j < testDef.hlCount.length; ++j) {
-            let test = new testClass(
+            const test = new testClass(
                 nodePath,
                 testDir,
                 testDef.sinterval,
@@ -125,12 +126,19 @@ function ReportResults() {
         console.log(chalk.bold.red(`Failed: ${failing}`));
     }
 
-    let moduleArray = Array.from(moduleSet);
+    const moduleArray = Array.from(moduleSet);
     moduleArray.sort();
 
-    let mPath = path.create(__dirname).append('moduleList.txt').path;
-    let mList = moduleArray.join('\n');
+    const mPath = path.create(__dirname).append('moduleList.txt').path;
+    const mList = moduleArray.join('\n');
     fs.writeFileSync(mPath, mList);
+
+    const junitXml = junitReport(taskList);
+    if (typeof program.junit === 'string') {
+        fs.writeFileSync(program.junit, junitXml);
+    } else {
+        console.log(junitXml.toString());
+    }
 
     console.log('');
     console.log(`Total packages tested: ${taskList.length}.`);
@@ -163,7 +171,7 @@ function ProcessWork() {
     if (currentTask === taskList.length) {
         ReportResults();
     } else {
-        let cTask = taskList[currentTask];
+        const cTask = taskList[currentTask];
 
         if (cTask.getResult() === BaseTest.Result.skip) {
             console.log(`Running test: "${cTask.getFullName()}"`);
