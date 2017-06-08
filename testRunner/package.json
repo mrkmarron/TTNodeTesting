@@ -6,8 +6,9 @@
   "dependencies": {
     "async": "*",
     "chalk": "*",
-    "commander": "^2.9.0",
+    "commander": "*",
     "filepath": "*",
-    "fs-extra": "*"
+    "fs-extra": "*",
+    "xmlbuilder": "*"
   }
 }
