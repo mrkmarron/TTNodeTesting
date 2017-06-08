@@ -1,38 +1,36 @@
-let assert = require('assert');
-let fs = require('fs');
-let fsExtra = require('fs-extra');
-let cpath = require('path');
-let path = require('filepath');
-let chalk = require('chalk');
-let program = require('commander');
+const assert = require('assert');
+const chalk = require('chalk');
+const cpath = require('path');
+const fs = require('fs');
+const path = require('filepath');
+const program = require('commander');
 
-let saTest = require('./standAloneTest');
-let hTest = require('./httpTest');
+const BaseTest = require('./lib/base-test');
+const HttpTest = require('./lib/http-test');
+const StandAloneTest = require('./lib/stand-alone-test');
+const junitReport = require('./lib/junit-report');
 
 program
-    .option('-n, --node <node>', 'The path to the node executable',)
+    .option('-n, --node <path>', 'Path to the node executable')
+    .option('-x, --junit [path]', 'Output results in junit xml with optional file path')
     .parse(process.argv);
 
-if (!program.node) {
-    console.error(`Node path must be specified`);
+const nodePath = path.create(program.node ? program.node : process.execPath);
+
+if(!fs.existsSync(nodePath.toString())) {
+    console.error(`Invalid node path: "${nodePath}"`);
     process.exit(1);
 }
 
-let nodePath = path.create(program.node);
 console.log(`Node path is: "${nodePath}"`);
 
-const TaskStateFlag = {
-    record: 'record',
-    replay: 'replay',
-    done: 'done'
-}
-
-let taskList = [];
+const taskList = [];
 let currentTask = 0;
 let passing = 0;
+let skipped = 0;
 let failing = 0;
 
-let moduleSet = new Set();
+const moduleSet = new Set();
 
 let standAloneTests = [
     {path: 'asyncNPM', hlCount: [6, 100], sinterval:0},
@@ -73,71 +71,44 @@ let httpTests = [
     {path: 'rockyNPM', hlCount: [5, 100], sinterval:0}
 ];
 
-//for debugging a single test
-//standAloneTests = [{path: 'fs', hlCount: [6, 100], sinterval:0}];
-//httpTests = [{path: 'reactwebNPM', hlCount: [5, 100], sinterval:0}];
+// for debugging a single test
+////standAloneTests = [{path: 'fs', hlCount: [6, 100], sinterval:0}];
+////httpTests = [{path: 'reactwebNPM', hlCount: [5, 100], sinterval:0}];
 
-function LoadAllStandAloneTests() {
-    let rootPath = path.create(__dirname).resolve('..' + cpath.sep + 'tests' + cpath.sep + 'standAlone' + cpath.sep);
-
-    for(let i = 0; i < standAloneTests.length; ++i) {
-        let ctest = standAloneTests[i];
-
-        let sp = rootPath.append(ctest.path);
-        let st = saTest.loadTest(nodePath, sp);
-
-        let modulePath = sp.append('node_modules').path;
-        if(fs.existsSync(modulePath) && ctest.warn === undefined) {
-            let npmModules = fs.readdirSync(modulePath);
-            for (let j = 0; j < npmModules.length; ++j) {
-                if (!npmModules[j].startsWith('.')) {
-                    moduleSet.add(npmModules[j]);
-                }
+function logModules(testDir) {
+    const modulePath = testDir.append('node_modules').path;
+    if (fs.existsSync(modulePath)) {
+        fs.readdirSync(modulePath).forEach((npmModule) => {
+            if (!npmModule.startsWith('.')) {
+                moduleSet.add(npmModule);
             }
-        }
-
-        let ttask = {task: st, nextAction: TaskStateFlag.record, hlCount: ctest.hlCount, sinterval: ctest.sinterval};
-        if(ctest.warn !== undefined) {
-            ttask.warn = ctest.warn;
-        }
-
-        taskList.push(ttask);
+        });
     }
 }
 
-function LoadAllHttpTests() {
-    let rootPath = path.create(__dirname).resolve('..' + cpath.sep + 'tests' + cpath.sep + 'http' + cpath.sep);
+function LoadTests(subDir, testList, testClass) {
+    const rootPath = path.create(__dirname).resolve(
+        `..${cpath.sep}tests${cpath.sep}${subDir}${cpath.sep}`);
 
-    for(let i = 0; i < httpTests.length; ++i) {
-        let ctest = httpTests[i];
+    for (let i = 0; i < testList.length; ++i) {
+        const testDef = testList[i];
+        const testDir = rootPath.append(testDef.path);
 
-        let sp = rootPath.append(ctest.path);
-        let st = hTest.loadTest(nodePath, sp);
+        for (let j = 0; j < testDef.hlCount.length; ++j) {
+            const test = new testClass(
+                nodePath,
+                testDir,
+                testDef.sinterval,
+                testDef.hlCount[j]);
 
-        let modulePath = sp.append('node_modules').path;
-        if(fs.existsSync(modulePath) && ctest.warn === undefined) {
-            let npmModules = fs.readdirSync(modulePath);
-            for (let j = 0; j < npmModules.length; ++j) {
-                if (!npmModules[j].startsWith('.')) {
-                    moduleSet.add(npmModules[j]);
-                }
+            if (testDef.warn) {
+                test.skip(testDef.warn);
             }
+
+            taskList.push(test);
         }
 
-        let ttask = {
-            task: st, 
-            nextAction: TaskStateFlag.record, 
-            hlCount: ctest.hlCount, 
-            sinterval: ctest.sinterval, 
-            hasDriver: st.hasDriver, 
-            driver: st.driver
-        };
-
-        if(ctest.warn !== undefined) {
-            ttask.warn = ctest.warn;
-        }
-
-        taskList.push(ttask);
+        logModules(testDir);
     }
 }
 
@@ -145,20 +116,29 @@ function ReportResults() {
     console.log('');
     console.log('++++++++++++');
 
-    if(failing == 0) {
-        console.log(chalk.bold.green(`Passed all ${passing} tests!`));
-    }
-    else {
-        console.log(chalk.bold.green(`Passed ${passing} tests.`));
-        console.log(chalk.bold.red(`Failed ${failing} tests.`));
+    console.log(chalk.bold.green(`Passed: ${passing}`));
+
+    if (skipped > 0) {
+        console.log(chalk.bold.yellow(`Skipped: ${skipped}`));
     }
 
-    let moduleArray = Array.from(moduleSet);
+    if (failing > 0) {
+        console.log(chalk.bold.red(`Failed: ${failing}`));
+    }
+
+    const moduleArray = Array.from(moduleSet);
     moduleArray.sort();
 
-    let mPath = path.create(__dirname).append('moduleList.txt').path;
-    let mList = moduleArray.join('\n');
+    const mPath = path.create(__dirname).append('moduleList.txt').path;
+    const mList = moduleArray.join('\n');
     fs.writeFileSync(mPath, mList);
+
+    const junitXml = junitReport(taskList);
+    if (typeof program.junit === 'string') {
+        fs.writeFileSync(program.junit, junitXml);
+    } else {
+        console.log(junitXml.toString());
+    }
 
     console.log('');
     console.log(`Total packages tested: ${taskList.length}.`);
@@ -166,72 +146,46 @@ function ReportResults() {
     console.log('Full module list written to moduleList.txt.');
 }
 
-function ProcessSingleResult(success) {
-    if (success) {
-        passing++;
-        console.log(chalk.green('Passed'));
-    }
-    else {
-        failing++;
-        console.log(chalk.bold.red('Failed'));
-    }
+function ProcessSingleResult(task) {
+    if (task.getState() === BaseTest.State.done) {
+        if (task.getResult() === BaseTest.Result.pass) {
+            passing++;
+            console.log(chalk.green('Passed'));
+        } else if (task.getResult() === BaseTest.Result.skip) {
+            skipped++;
+            console.log(task.getLog());
+            console.log(chalk.bold.yellow('Skipped'));
+        } else {
+            failing++;
+            console.log(task.getLog());
+            console.log(chalk.bold.red('Failed'));
+        }
 
-    let cTask = taskList[currentTask];
-    if(cTask.nextAction === TaskStateFlag.record) {
-        if(success) {
-            cTask.nextAction = TaskStateFlag.replay;
-        }
-        else {
-            cTask.nextAction = TaskStateFlag.done;
-            currentTask++;
-        }
-    }
-    else {
-        assert(cTask.nextAction === TaskStateFlag.replay);
-
-        if(cTask.hlCount.length !== 0) {
-            cTask.nextAction = TaskStateFlag.record; 
-        }
-        else {
-            cTask.nextAction = TaskStateFlag.done;
-            currentTask++;
-        }
+        currentTask++;
     }
 
     setImmediate(ProcessWork);
 }
 
 function ProcessWork() {
-    if(currentTask === taskList.length) {
+    if (currentTask === taskList.length) {
         ReportResults();
-    }
-    else {
-        let cTask = taskList[currentTask];
+    } else {
+        const cTask = taskList[currentTask];
 
-        let logdir = cpath.normalize(__dirname + cpath.sep + '..' + cpath.sep + '_logDir' + cpath.sep);
-        fsExtra.ensureDirSync(logdir);
+        if (cTask.getResult() === BaseTest.Result.skip) {
+            console.log(`Running test: "${cTask.getFullName()}"`);
+            ProcessSingleResult(cTask);
+        } else {
+            if (cTask.getState() === BaseTest.State.none) {
+                console.log(`Running test: "${cTask.getFullName()}"`);
+                BaseTest.clearRecordDir();
 
-        if(cTask.warn !== undefined) {
-            console.log(`Skipping Test for ${chalk.bold(cTask.task.name)}...`)
-            console.log(chalk.bold.yellow('Warn: ' + cTask.warn));
+                cTask.runRecord(ProcessSingleResult);
+            } else {
+                assert(cTask.getState() === BaseTest.State.record);
 
-            currentTask++;
-            setImmediate(ProcessWork);
-        }
-        else {
-            if (cTask.nextAction === TaskStateFlag.record) {
-                fsExtra.emptyDirSync(logdir);
-
-                if(cTask.task.useDriver) {
-                    cTask.task.runRecord(ProcessSingleResult, cTask.sinterval, cTask.hlCount.pop(), cTask.task.driver);
-                }
-                else {
-                    cTask.task.runRecord(ProcessSingleResult, cTask.sinterval, cTask.hlCount.pop());
-                }
-            }
-            else {
-                assert(cTask.nextAction === TaskStateFlag.replay);
-                cTask.task.runReplay(ProcessSingleResult);
+                cTask.runReplay(ProcessSingleResult);
             }
         }
     }
@@ -239,7 +193,7 @@ function ProcessWork() {
 
 ////////
 
-LoadAllStandAloneTests();
-LoadAllHttpTests();
+LoadTests('standAlone', standAloneTests, StandAloneTest);
+LoadTests('http', httpTests, HttpTest);
 
 ProcessWork();
